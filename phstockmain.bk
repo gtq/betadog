@@ -1,0 +1,25 @@
+[RunSettings]
+currdate = 20160908
+offset = 0
+fnamepattern = %s-%s.csv
+
+[SiteSettings]
+enablelogin = yes
+username = xxx 
+passwd = yyy
+frmusername = ctl00$ContentPlaceHolder1$uname
+frmpasswd = ctl00$ContentPlaceHolder1$pword
+loginurl = https://www.philstocks.ph/Public/Default.aspx
+logouturl = https://www.philstocks.ph/Public/LogOut.cshtml
+detailurl = https://www.philstocks.ph/Infinity/Transactions.cshtml?Symbol=%s
+datafile = tradetraq
+tablename = timesales
+idcol1 = tradeid
+idcol2 = assetid
+col1 = tradetime
+col2 = price
+col3 = change
+col4 = quantity
+col5 = buyid
+col6 = sellid
+
