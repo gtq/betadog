@@ -20,6 +20,7 @@ config.read('phedgemarket.cfg')
 
 #load run specific config
 fnamepattern = config.get('RunSettings','fnamepattern')
+ignoredate = config.getboolean('RunSettings','ignoredate')
 
 #load site specific config
 detailurl = config.get('SiteSettings','detailurl')
@@ -79,22 +80,26 @@ marketdata = soup.find("div", {"id": "market"})
 details = marketdata.findAll("tr")
 marketdate = marketdata.find("th","alignR").string[8:20].strip()
 marketnow=datetime.datetime.strptime(marketdate, "%b %d, %Y").date()
-if (marketnow.day!=now.day or marketnow.month!=now.month or marketnow.year!=now.year):
- print marketnow
- quit()
+if ignoredate:
+ currdate=marketnow.strftime("%Y%m%d")
+ fnamestring=fnamepattern % (currdate)
 else:
- configmain = ConfigParser.RawConfigParser()
- configmain.read('../phstockmain.cfg')
- configmain.set('RunSettings','offset',0)
- configmain.set('RunSettings','currdate',currdate)
- with open('../phstockmain.cfg', 'wb') as configfile:
-    configmain.write(configfile)
- configmain = ConfigParser.RawConfigParser()
- configmain.read('phedgemain.cfg')
- configmain.set('RunSettings','offset',0)
- configmain.set('RunSettings','currdate',currdate)
- with open('phedgemain.cfg', 'wb') as configfile:
-    configmain.write(configfile)
+ if (marketnow.day!=now.day or marketnow.month!=now.month or marketnow.year!=now.year):
+  print marketnow
+  quit()
+
+configmain = ConfigParser.RawConfigParser()
+configmain.read('../phstockmain.cfg')
+configmain.set('RunSettings','offset',0)
+configmain.set('RunSettings','currdate',currdate)
+with open('../phstockmain.cfg', 'wb') as configfile:
+ configmain.write(configfile)
+configmain = ConfigParser.RawConfigParser()
+configmain.read('phedgemain.cfg')
+configmain.set('RunSettings','offset',0)
+configmain.set('RunSettings','currdate',currdate)
+with open('phedgemain.cfg', 'wb') as configfile:
+ configmain.write(configfile)
 
 
 marketdatarows=[]
