@@ -104,6 +104,10 @@ except:
 
 cnt=offset
 for secsym in symbols[cnt:]:
+ config.set('RunSettings','offset', cnt)
+ with open('../phstockmain.cfg', 'wb') as configfile:
+  config.write(configfile)
+
  urlstring=detailurl % (secsym)
  fnamestring=fnamepattern % (secsym,currdate)
  cnt=cnt+1
@@ -139,11 +143,10 @@ for secsym in symbols[cnt:]:
 
    if len(rowwrite)>1:
     tswriter.writerow(rowwrite)
-    print rowwrite
-    querystring = "INSERT OR IGNORE INTO {tn} ({idf1}, {idf2}, {cn1},{cn2},{cn3},{cn4},{cn5},{cn6}) VALUES (%s,'%s',%s)" % (currdate,secsym,','.join(["'%s'" % x.encode('ascii','ignore').replace(',','') for x in rowwrite]))
-    print querystring
+    querystring = "INSERT OR IGNORE INTO {tn} ({idf1}, {idf2}, {cn1},{cn2},{cn3},{cn4},{cn5},{cn6}) VALUES (%s,'%s',%s)" % (currdate,secsym,(','.join(["'%s'" % x.encode('ascii','ignore').replace(',','') for x in rowwrite])))
     querystring = querystring .\
-    format(tn=tablename, idf1=idcol2, idf2=idcol2, cn1=col1,cn2=col2,cn3=col3,cn4=col4,cn5=col5,cn6=col6)
+    format(tn=tablename, idf1=idcol1, idf2=idcol2, cn1=col1,cn2=col2,cn3=col3,cn4=col4,cn5=col5,cn6=col6)
+    print querystring
     c.execute(querystring)
 
 #left column buyer, right column seller
