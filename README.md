@@ -1,7 +1,7 @@
 # Betadog
 The dog that follows the alpha.
 
-A stock market strategy can typically be trend following since many people do not have enough funds to set the market trend. This can be done in two general ways, by using pre-existing data and back testings or by gathering fresh data and looking out for trend patterns in existing market players. In the market that this code is being tested, the market broker positions are declared. This makes a market following strategy even more plausible.
+The stock market strategy of people who do not have enough available time or funds to set the market trend would typically be trend following. This can be done in two general ways, by formulating a strategy and using pre-existing data then back-testing or by gathering fresh data and looking out for trend patterns in existing market players. In the market that this code is being tested, the market broker positions are declared. This provides more data for a market following strategy.
 
 This project has three parts:gathering of market data, analysis, and finally testing in the market.
 
